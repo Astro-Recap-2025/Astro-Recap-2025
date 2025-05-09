@@ -1,0 +1,49 @@
+---
+import MainLayout from "../layout/MainLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+
+// Fetch products
+
+const data = await fetch("https://dummyjson.com/products")
+  .then((res) => res.json())
+  .then((data) => data.products);
+console.log(data);
+---
+
+<MainLayout>
+  <h1>titel</h1>
+  <section>
+    <ul>
+      {
+        data.map((product: any) => {
+          return (
+            <li>
+              <ProductCard
+                title={product.title}
+                img={product.thumbnail}
+                price={product.price}
+                paths={product.id}
+              />
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+</MainLayout>
+
+<style>
+  ul {
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: auto auto auto auto;
+    gap: 1rem;
+    list-style: none;
+  }
+
+  li {
+    list-style-type: none;
+    display: contents;
+  }
+</style>

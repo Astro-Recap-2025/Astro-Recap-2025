@@ -1,0 +1,42 @@
+---
+const { img, title, price, paths } = Astro.props;
+---
+
+<a href={"/products/" + paths}>
+  <article>
+    <img src={img} alt={title} />
+    <h2>{title}</h2>
+    <p>{price}</p>
+    <button>Button</button>
+  </article>
+</a>
+
+<style>
+  
+  article {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    filter: drop-shadow(5px 5px 5px #eee);
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+    display: contents;
+  }
+
+  button {
+    background-color: brown;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 0.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+</style>
