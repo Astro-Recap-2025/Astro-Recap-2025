@@ -1,31 +1,64 @@
 ---
-const { img, title, price, paths } = Astro.props;
----
+import { Image } from "astro:assets";
 
-<a href={"/products/" + paths}>
-  <article>
-    <img src={img} alt={title} />
-    <h2>{title}</h2>
-    <p>{price}</p>
-    <button>Button</button>
-  </article>
-</a>
+const { img, title, price, path } = Astro.props;
+---
+<li>
+    <article>
+      <Image src={img} alt={title} inferSize />
+      <h2><a href={"/products/" + path}>{title}</a></h2>
+      <p>{price},-</p>
+      <button>Add to basket</button>
+    </article>
+  </a>
+</li>
 
 <style>
+
+li {
+    display: contents;
+  }
   article {
+    position: relative;
     display: grid;
     grid-template-rows: subgrid;
     grid-row: span 4;
-    padding: 1.5rem;
     background-color: #fff;
     border-radius: 10px;
+    padding-block-end: 1rem;
     filter: drop-shadow(5px 5px 5px #eee);
   }
+  
+    img {
+      object-fit: cover;
+      place-self: center;
+    }
 
-  a {
-    text-decoration: none;
+  article:hover img {
+    opacity: 80%;
+  }
+
+  h2, p, button {
+    margin-inline: 1rem;
+  }
+
+  h2 a {
+    font-size: 1.25rem;
+    font-weight: 600;
     color: #000;
-    display: contents;
+    text-decoration: none;
+  }
+
+  h2 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  p {
+    text-align: right;
+    font-weight: 500;
+    opacity: 90%;
   }
 
   button {
@@ -37,5 +70,11 @@ const { img, title, price, paths } = Astro.props;
     padding: 0.75rem 0.5rem;
     text-transform: uppercase;
     font-weight: 600;
+    z-index: 10;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 75%;
   }
 </style>
